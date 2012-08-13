@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<style>
+			.clearfix:after {
+				content: "";
+				display: block;
+				clear: both;
+			}
+						
+			ul#ddmenus {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			
+			ul#ddmenus li {
+				float: left;
+				margin: 0;
+				padding: 0;
+				
+				list-style: none outside none;
+				border: solid 1px black;
+				background: #5970B2;
+
+				font: bold 11px arial;
+				color: #FFF;
+				text-decoration: none;
+				text-align: center;
+			}
+						
+			.submenu {
+			  background: #EAEBD8;
+			  border: 1px solid #5970B2;
+			  /*visibility: hidden;*/
+			  position: absolute;
+			  z-index: 3;
+			}
+			
+			.submenu a {
+			  display: block;
+			  font: 11px arial;
+			  text-align: left;
+			  text-decoration: none;
+			  padding: 5px;
+			  color: #2875DE;
+			}
+			
+			.submenu a:hover {
+			  background: #49A3FF;
+			  color: #FFF;
+			}
+		</style>
+		<script type="text/javascript">
+			/* This script and many more are available free online at
+			The JavaScript Source!! http://javascript.internet.com
+			Created by: Konstantin Jagello | http://javascript-array.com/ */
+			
+			var TimeOut         = 300;
+			var currentLayer    = null;
+			var currentitem     = null;
+			var currentLayerNum = 0;
+			var noClose         = 0;
+			var closeTimer      = null;
+			
+			function mopen(event) {
+			  //var l = this.parentNode.nextSibling.tagName;
+			  var l = this.parentNode.nextSibling;
+			  console.log("node is  " + l);
+			  //var l  = document.getElementById("menu"+n);
+			  /*
+			  var mm = document.getElementById("mmenu"+n);
+				
+			  if(l) {
+			    mcancelclosetime();
+			    l.style.visibility='visible';
+			    if(currentLayer && (currentLayerNum != n))
+			      currentLayer.style.visibility='hidden';
+			    currentLayer = l;
+			    currentitem = mm;
+			    currentLayerNum = n;			
+			  } else if(currentLayer) {
+			    currentLayer.style.visibility='hidden';
+			    currentLayerNum = 0;
+			    currentitem = null;
+			    currentLayer = null;
+			 	}
+			 	*/
+			}
+			
+			function mclosetime() {
+			  closeTimer = window.setTimeout(mclose, TimeOut);
+			}
+			
+			function mcancelclosetime() {
+			  if(closeTimer) {
+			    window.clearTimeout(closeTimer);
+			    closeTimer = null;
+			  }
+			}
+			
+			function mclose() {
+			  if(currentLayer && noClose!=1)   {
+			    currentLayer.style.visibility='hidden';
+			    currentLayerNum = 0;
+			    currentLayer = null;
+			    currentitem = null;
+			  } else {
+			    noClose = 0;
+			  }
+			  currentLayer = null;
+			  currentitem = null;
+			}
+			
+			document.onclick = mclose;
+			
+			function test() {
+				alert("test");
+			}
+			
+			document.addEventListener("DOMContentLoaded", function() {
+				var menus = document.getElementsByClassName("menu");
+				
+				for(var i=0; i < menus.length; i++) {
+					menus[i].firstChild.addEventListener("click", mopen, false);
+				}
+				
+				console.log(menus[0].className);
+				console.log(menus.length);
+				console.log(menus[0].tagName);
+				console.log(menus[0].firstChild.tagName);
+			}, false);
+			
+		</script>
+		<title>HTML</title>
+		<meta name="author" content="鎗水謙星" />
+		<!-- Date: 2012-08-13 -->
+	</head>
+	<body>
+		<ul id="ddmenus" class="clearfix">
+			<li>
+				<div class="menu"><a href="#menu1">Main Menu1</a></div>
+				<div class="submenu">
+					<a href="#">Sub Menu1</a>
+					<a href="#">Sub Menu1</a>
+					<a href="#">Sub Menu1</a>
+					<a href="#">Sub Menu1</a>
+				</div>
+			</li>
+			<li>
+				<div class="menu"><a href="#menu2">Main Menu2</a></div>
+				<div class="submenu">
+					<a href="#">Sub Menu2</a>
+					<a href="#">Sub Menu2</a>
+					<a href="#">Sub Menu2</a>
+					<a href="#">Sub Menu2</a>
+				</div>
+			</li>
+			<li>
+				<div class="menu"><a href="#menu3">Main Menu3</a></div>
+				<div class="submenu">
+					<a href="#">Sub Menu3</a>
+					<a href="#">Sub Menu3</a>
+					<a href="#">Sub Menu3</a>
+					<a href="#">Sub Menu3</a>
+				</div>
+			</li>
+		</ul>
+		<div>clearfixされているか確かめたい。</div>
+		<div>clearfixされているか確かめたい。</div>
+		<input type="textarea" id="txt">
+	</body>
+</html>
+
