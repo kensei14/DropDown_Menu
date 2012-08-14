@@ -35,7 +35,7 @@
 			.submenu {
 			  background: #EAEBD8;
 			  border: 1px solid #5970B2;
-			  /*visibility: hidden;*/
+			  visibility: hidden;
 			  position: absolute;
 			  z-index: 3;
 			}
@@ -59,6 +59,8 @@
 			The JavaScript Source!! http://javascript.internet.com
 			Created by: Konstantin Jagello | http://javascript-array.com/ */
 			
+			
+			/*
 			var TimeOut         = 300;
 			var currentLayer    = null;
 			var currentitem     = null;
@@ -68,27 +70,30 @@
 			
 			function mopen(event) {
 			  //var l = this.parentNode.nextSibling.tagName;
-			  var l = this.parentNode.nextSibling;
-			  console.log("node is  " + l);
+			  var ll = this.parentNode.parentNode.getElementsByClassName("submenu");
+			  console.log("node is  " + ll[0].tagName);
+  			  console.log("node is  " + ll[0].className);
+  			  var l = ll[0];
+  			  
 			  //var l  = document.getElementById("menu"+n);
-			  /*
-			  var mm = document.getElementById("mmenu"+n);
-				
+			  //var mm = document.getElementById("mmenu"+n);
+			  var mm = 1;
+  			  console.log("node is  " + l.style.visibility);
 			  if(l) {
 			    mcancelclosetime();
 			    l.style.visibility='visible';
-			    if(currentLayer && (currentLayerNum != n))
-			      currentLayer.style.visibility='hidden';
+			    //if(currentLayer && (currentLayerNum != n))
+			    //  currentLayer.style.visibility='hidden';
 			    currentLayer = l;
 			    currentitem = mm;
-			    currentLayerNum = n;			
+			    currentLayerNum = 1;
+	  			  console.log("node is  " + l.style.visibility);
 			  } else if(currentLayer) {
 			    currentLayer.style.visibility='hidden';
 			    currentLayerNum = 0;
 			    currentitem = null;
 			    currentLayer = null;
 			 	}
-			 	*/
 			}
 			
 			function mclosetime() {
@@ -116,6 +121,28 @@
 			}
 			
 			document.onclick = mclose;
+			*/
+			var ll;
+			var l;
+			var dfn = false;
+			function mopen() {
+				if (!dfn) {
+					ll = this.parentNode.parentNode.getElementsByClassName("submenu");
+					l = ll[0];
+					console.log("node is  " + ll[0].tagName);
+		  			console.log("node is  " + ll[0].className);
+					l.style.visibility = "visible";					
+					dfn = true;
+				}
+
+			}
+			
+			function mclose() {
+				if (dfn) {
+					l.style.visibility = "hidden";
+					dfn = false;					
+				}
+			}
 			
 			function test() {
 				alert("test");
@@ -125,7 +152,8 @@
 				var menus = document.getElementsByClassName("menu");
 				
 				for(var i=0; i < menus.length; i++) {
-					menus[i].firstChild.addEventListener("click", mopen, false);
+					menus[i].firstChild.addEventListener("mouseenter", mopen, false);
+					menus[i].parentNode.addEventListener("mouseleave", mclose, false);
 				}
 				
 				console.log(menus[0].className);
